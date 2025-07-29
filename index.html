@@ -212,7 +212,11 @@
       margin: 0 auto;
       box-shadow: 0 4px 12px rgba(193, 122, 132, 0.3);
     }
+    .hidden {
+        display: none !important;
+    }
 
+    
     /* Responsive */
     @media (max-width: 600px) {
       main {
@@ -237,6 +241,10 @@
       .tier p {
         font-size: 1rem;
       }
+      .hidden {
+        display: none !important;
+    }
+
     }
   </style>
 </head>
@@ -319,10 +327,10 @@
         <button type="submit">Submit & Pay</button>
       </form>
 
-     <section id="thank-you" class="hidden" style="padding: 2rem; background: #fff8f7; border-radius: 15px; box-shadow: 0 4px 12px rgba(58,58,58,0.1); max-width: 600px; margin: 2rem auto;">
-        <h2>Thank you for signing up!</h2>
-        <p>Coach Kelsey will be in touch soon to finalize payment and scheduling.</p>
-      </section>
+     <section id="thank-you" class="hero hidden">
+  <h2>Thank you for signing up!</h2>
+  <p>Coach Kelsey will be in touch soon to finalize payment and scheduling.</p>
+</section>
 
       
       <div class="venmo-section">
@@ -338,40 +346,46 @@
 
   <script>
     document.getElementById('signupForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
+  e.preventDefault();
+  // your form logic here
+});
 
-      const data = {
-        parentName: document.getElementById('parentName').value,
-        childName: document.getElementById('childName').value,
-        age: document.getElementById('age').value,
-        email: document.getElementById('email').value,
-        session: document.getElementById('session').value,
-        notes: document.getElementById('notes').value
-      };
 
-      fetch("https://script.google.com/macros/s/AKfycbxvHdf41NjkFpXxloygKgjHKwS-E_ygM5OWyJR6JkC66cV6suocVsdqUYorRHP-f9vk/exec", {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-     .then(res => res.json())
-      .then(data => {
-        if (data.result === "success") {
-          // Hide only the intro hero, not thank-you
-          document.querySelector("form").classList.add("hidden");
-          document.querySelector(".intro-hero").classList.add("hidden");
-          document.getElementById("thank-you").classList.remove("hidden");
-        } else {
-          alert("Something went wrong. Please try again.");
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert("An error occurred. Please try again later.");
-      });
-    });
+     document.getElementById('signupForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const formData = {
+    parentName: document.getElementById('parentName').value,
+    childName: document.getElementById('childName').value,
+    age: document.getElementById('age').value,
+    email: document.getElementById('email').value,
+    session: document.getElementById('session').value,
+    notes: document.getElementById('notes').value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbxvHdf41NjkFpXxloygKgjHKwS-E_ygM5OWyJR6JkC66cV6suocVsdqUYorRHP-f9vk/exec", {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.result === "success") {
+      document.querySelector("form").classList.add("hidden");
+      document.querySelector(".hero").classList.add("hidden");
+      document.getElementById("thank-you").classList.remove("hidden");
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("An error occurred. Please try again later.");
+  });
+});
+
   </script>
 </body>
 </html>
