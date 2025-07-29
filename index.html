@@ -337,7 +337,7 @@
         childName: document.getElementById('childName').value,
         age: document.getElementById('age').value,
         email: document.getElementById('email').value,
-        session: document.getElementById('session').value
+        session: document.getElementById('session').value,
         notes: document.getElementById('notes').value
       };
 
@@ -351,12 +351,13 @@
           body: JSON.stringify(data)
         });
 
+        alert("Form submitted! You’ll now be redirected to Venmo.");
         this.reset();
 
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const venmoLink = isMobile
-          ? "venmo://paycharge?txn=pay&recipients=kelseyywhitakerr&note=Pickleball+Sign-Up"
-          : "https://venmo.com/u/kelseyywhitakerr";
+          ? "venmo://paycharge?txn=pay&recipients=CoachKelseyPickleball&note=Pickleball+Sign-Up"
+          : "https://venmo.com/u/CoachKelseyPickleball";
 
         window.location.href = venmoLink;
       } catch (error) {
