@@ -319,6 +319,13 @@
         <button type="submit">Submit & Pay</button>
       </form>
 
+      <section id="thank-you" class="hidden">
+    <div class="hero">
+      <h2>Thank you for signing up!</h2>
+      <p>Coach Kelsey will be in touch soon to finalize payment and scheduling.</p>
+    </div>
+  </section>
+      
       <div class="venmo-section">
         <p>After submitting, please send payment via Venmo to:</p>
         <strong>@kelseyywhitakerr</strong>
@@ -343,26 +350,28 @@
         notes: document.getElementById('notes').value
       };
 
-      try {
-        await fetch('https://script.google.com/macros/s/AKfycbxvHdf41NjkFpXxloygKgjHKwS-E_ygM5OWyJR6JkC66cV6suocVsdqUYorRHP-f9vk/exec', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-
-        this.reset();
-
-        
-
-        window.location.href = venmoLink;
-      } catch (error) {
-        alert("There was a problem submitting the form. Please try again later.");
-        console.error(error);
-      }
-    });
+      fetch("https://script.google.com/macros/s/AKfycbxvHdf41NjkFpXxloygKgjHKwS-E_ygM5OWyJR6JkC66cV6suocVsdqUYorRHP-f9vk/exec", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.result === "success") {
+          document.querySelector("form").classList.add("hidden");
+          document.querySelector(".hero").classList.add("hidden");
+          document.getElementById("thank-you").classList.remove("hidden");
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("An error occurred. Please try again later.");
+      });
+    }
   </script>
 </body>
 </html>
