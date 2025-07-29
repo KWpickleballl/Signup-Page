@@ -313,6 +313,9 @@
           <option value="afternoon">Afternoon</option>
         </select>
 
+        <label for="notes">Additional Notes:</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="Allergies, preferred times, questions, etc."></textarea>
+
         <button type="submit">Submit & Pay</button>
       </form>
 
@@ -336,7 +339,8 @@
         childName: document.getElementById('childName').value,
         age: document.getElementById('age').value,
         email: document.getElementById('email').value,
-        session: document.getElementById('session').value
+        session: document.getElementById('session').value,
+        notes: document.getElementById('notes').value
       };
 
       try {
