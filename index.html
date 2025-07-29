@@ -2,115 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pickleball with Coach Kelsey</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Quicksand', sans-serif;
       margin: 0;
-      background: #fefefe;
-      color: #333;
+      background: #f9f4f1;
+      color: #3a3a3a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
     header {
-      background: #ff69b4;
-      color: white;
-      padding: 1rem;
+      background: #c17a84;
+      color: #f9f4f1;
+      padding: 1.5rem;
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      box-shadow: 0 2px 6px rgba(58, 58, 58, 0.15);
     }
+
     main {
-      padding: 2rem;
-      display: grid;
-      gap: 2rem;
+      flex-grow: 1;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
     }
-    form {
-      background: #fff;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin: auto;
-    }
-    label {
-      display: block;
-      margin-top: 1rem;
-    }
-    input, select {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background: #ff69b4;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 1.5rem;
-    }
-    .venmo-section {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .gallery-placeholder {
-      background: #eee;
-      height: 300px;
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      height: 280px;
+      background: url('https://images.unsplash.com/photo-1603052875177-1ae1d36b4396?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+      box-shadow: 0 4px 10px rgba(58, 58, 58, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #999;
-      font-size: 1.2rem;
-      border-radius: 10px;
+      color: #3a3a3a;
+      text-shadow: none;
     }
-    .pricing-section {
-      background: #ffeef6;
-      border-radius: 10px;
-      padding: 2rem;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(193, 122, 132, 0.7);
+      mix-blend-mode: multiply;
+      z-index: 0;
     }
-    .pricing-section h2 {
+
+    .hero h1 {
+      position: relative;
+      background: #e9d6d8; /* soft pastel pink-beige */
+      padding: 1.2rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 15px rgba(193, 122, 132, 0.3);
+      font-size: 2.2rem;
+      font-weight: 700;
+      max-width: 80%;
       text-align: center;
-      color: #d63384;
+      z-index: 1;
+      line-height: 1.3;
+      color: #6a4b4f; /* muted dark rose text */
+      text-shadow: none;
     }
-    .pricing-table {
-      margin-top: 1rem;
+
+    /* About Section */
+    .about {
+      background: #fff8f7;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(58, 58, 58, 0.1);
+      line-height: 1.5;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Form Section */
+    form {
+      background: #fff8f7;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(58, 58, 58, 0.1);
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.2rem;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      display: block;
+      color: #6a4b4f;
+    }
+    input, select {
+      padding: 0.6rem 0.8rem;
+      border: 1.5px solid #d8c7c9;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
       width: 100%;
     }
-    .pricing-table td {
-      padding: 0.75rem;
+    input:focus, select:focus {
+      border-color: #c17a84;
+      outline: none;
     }
-    .pricing-table td:first-child {
-      font-weight: bold;
+
+    button {
+      background: #c17a84;
+      color: #f9f4f1;
+      border: none;
+      padding: 0.85rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      justify-self: start;
+      box-shadow: 0 4px 8px rgba(193, 122, 132, 0.6);
+    }
+    button:hover {
+      background: #b36e74;
+      box-shadow: 0 6px 12px rgba(179, 110, 116, 0.8);
+    }
+
+    .venmo-section {
+      text-align: center;
+      margin-top: 1.8rem;
+      font-size: 1rem;
+      color: #7f5e62;
+    }
+    .venmo-section strong {
+      font-size: 1.2rem;
+      color: #c17a84;
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    /* Gallery Section */
+    .gallery-placeholder {
+      background: #f3d5d8;
+      border: 2px dashed #c17a84;
+      border-radius: 15px;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: #c17a84;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 4px 12px rgba(193, 122, 132, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+      }
+      .hero h1 {
+        font-size: 1.7rem;
+        padding: 1rem 1.5rem;
+      }
+      form {
+        max-width: 100%;
+      }
+      .gallery-placeholder {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    Pickleball with Coach Kelsey
-  </header>
+  <header>Pickleball with Coach Kelsey</header>
   <main>
-    <section class="pricing-section">
-      <h2>Pricing</h2>
-      <table class="pricing-table">
-        <tr>
-          <td>Group Sessions 5+ Kids</td>
-          <td>$10/hr Per Child</td>
-        </tr>
-        <tr>
-          <td>Group Sessions 2-4 Kids</td>
-          <td>$20/hr Per Child</td>
-        </tr>
-        <tr>
-          <td>Private Lessons</td>
-          <td>$45/hr</td>
-        </tr>
-      </table>
+    <section class="hero">
+      <h1>Building Confidence & Fun with Every Swing</h1>
+    </section>
+
+    <section class="about">
+      <h2>About Coach Kelsey</h2>
+      <p>
+        Kelsey has over 2 years of experience teaching kids ages 5-13 the exciting sport of pickleball. 
+        Her patient and enthusiastic approach helps young players develop skills, teamwork, and confidence on the court. 
+        Kelsey believes every child can enjoy and excel in pickleball with the right guidance and encouragement.
+      </p>
+      <p>
+        Classes focus on fundamentals, coordination, and having fun — all while building lifelong healthy habits. 
+        Join Kelsey’s sessions and watch your child thrive in a supportive and engaging environment.
+      </p>
     </section>
 
     <section>
@@ -153,7 +247,7 @@
 
       <div class="venmo-section">
         <p>After submitting, please send payment via Venmo to:</p>
-        <strong>@CoachKelseyPickleball</strong>
+        <strong>@kelseyywhitakerr</strong>
       </div>
     </section>
 
@@ -184,14 +278,13 @@
           body: JSON.stringify(data)
         });
 
-        alert("Form submitted! You’ll now be redirected to Venmo.");
         this.reset();
 
         // Redirect based on device
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const venmoLink = isMobile
-          ? "venmo://paycharge?txn=pay&recipients=CoachKelseyPickleball&note=Pickleball+Sign-Up"
-          : "https://venmo.com/u/CoachKelseyPickleball";
+          ? "venmo://paycharge?txn=pay&recipients=kelseyywhitakerr&note=Pickleball+Sign-Up"
+          : "https://venmo.com/u/kelseyywhitakerr";
 
         window.location.href = venmoLink;
       } catch (error) {
@@ -200,5 +293,8 @@
       }
     });
   </script>
+</body>
+</html>
+
 </body>
 </html>
